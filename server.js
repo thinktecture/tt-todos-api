@@ -4,8 +4,12 @@ const port = process.env.PORT ?? 3000;
 
 server.use(restify.plugins.bodyParser());
 
-const todos = new Map();
-let nextId = 1;
+const defaultTodos = [
+    [1, { "id": 1, "name": "Wäsche waschen", "done": false }],
+    [2, { "id": 2, "name": "Fenster putzen", "done": true }],
+];
+
+const todos = new Map(defaultTodos);
 
 server.get('/todos', (_, res, next) => {
     res.json(Array.from(todos.values()));
@@ -25,7 +29,7 @@ server.get('/todos/:id', (req, res, next) => {
 server.post('/todos', (req, res, next) => {
     try {
         const todo = req.body;
-        todo.id = nextId++;
+        todo.id = Array.from(todos.keys()).reduce((acc, curr) => Math.max(acc, curr), 0) + 1;
         todos.set(todo.id, todo);
         res.json(201, todo);
         next();
@@ -40,7 +44,6 @@ server.put('/todos/:id', (req, res, next) => {
     try {
         const todo = req.body;
         todo.id = +req.params.id;
-        console.log(todo.id);
         todos.set(todo.id, todo);
         res.send(204);
         next();
@@ -54,6 +57,13 @@ server.put('/todos/:id', (req, res, next) => {
 server.del('/todos/:id', (req, res, next) => {
     const removed = todos.delete(+req.params.id);
     res.send(removed ? 204 : 404);
+    next();
+});
+
+server.post('/reset', (_, res, next) => {
+    todos.clear();
+    defaultTodos.forEach(([id, todo]) => todos.set(id, todo));
+    res.send(204);
     next();
 });
 
