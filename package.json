@@ -1,0 +1,23 @@
+{
+  "name": "tt-todos-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thinktecture/tt-todos-api.git"
+  },
+  "author": "Christian Liebel",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/thinktecture/tt-todos-api/issues"
+  },
+  "homepage": "https://github.com/thinktecture/tt-todos-api#readme",
+  "dependencies": {
+    "restify": "^11.1.0"
+  },
+  "type": "module"
+}
