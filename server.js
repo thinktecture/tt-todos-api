@@ -1,5 +1,4 @@
-import restify from 'restify';
-
+const restify = require('restify');
 const server = restify.createServer();
 const port = process.env.PORT ?? 3000;
 

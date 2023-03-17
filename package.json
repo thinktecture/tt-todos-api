@@ -17,6 +17,5 @@
   "homepage": "https://github.com/thinktecture/tt-todos-api#readme",
   "dependencies": {
     "restify": "^11.1.0"
-  },
-  "type": "module"
+  }
 }
